@@ -94,4 +94,4 @@ By:
 
 Vemund <uve@ssb.no>
 
-Magnus Helliesen Kvåle <magnus-kvale.helliesen@gjensidige.no>
+Magnus Kvåle Helliesen <magnus.helliesen@gmail.com>
