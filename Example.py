@@ -29,6 +29,9 @@ import matplotlib as plt
 from mind4 import mind4
 from minm4 import minm4
 
+from mind4_quarterly import mind4_q
+from minm4_quarterly import minm4_q
+
 # %% [markdown]
 # ## Input Data
 
@@ -38,6 +41,14 @@ y_df = pd.read_csv('yearly_data.csv', index_col=0)
 
 m_df.index = pd.PeriodIndex(m_df.index, freq='M')
 y_df.index = pd.PeriodIndex(y_df.index, freq='A')
+
+# %%
+q_df = m_df.resample('Q').sum()
+
+q_df
+
+# %%
+m_df
 
 # %% [markdown]
 # ## Value to be Benchmarked
@@ -54,8 +65,15 @@ list_to_benchmarking = y_df.columns.to_list()
 baseyear = 2022
 firstyear = 2016
 
+# list_to_benchmarking1 = list_to_benchmarking
+# list_to_benchmarking1.remove('serieA')
+# list_to_benchmarking1
+
 # %% [markdown]
 # # Benchmarking
+
+# %% [markdown]
+# ### Monthly frequency
 
 # %%
 result_d4 = mind4(m_df, y_df, list_to_benchmarking, baseyear, firstyear)
@@ -68,13 +86,38 @@ result_m4 = minm4(m_df, y_df, list_to_benchmarking, baseyear, firstyear)
 #result_m4
 
 # %% [markdown]
-# ## Effect of Benchmarking
+# ### Quarterly frequency
 
 # %%
-(result_d4/m_df).plot()
+result_q_m4 = minm4_q(q_df, y_df, list_to_benchmarking, baseyear, firstyear)
+
+#result_m4
+
+# %%
+result_q_d4 = mind4_q(q_df, y_df, list_to_benchmarking, baseyear, firstyear)
+
+#result_q_d4
+
+# %% [markdown]
+# ## Effect of Benchmarking
+
+# %% [markdown]
+# ### Monthly frequency
+
+# %%
+(result_d4/m_df[list_to_benchmarking]).plot()
 
 # %%
 (result_m4/m_df).plot()
+
+# %% [markdown]
+# ### Quarterly frequency
+
+# %%
+(result_q_d4/q_df).plot()
+
+# %%
+(result_q_m4/q_df).plot()
 
 # %% [markdown]
 # # Deviations on the Total Post Benchmarking.
@@ -86,5 +129,15 @@ result_m4 = minm4(m_df, y_df, list_to_benchmarking, baseyear, firstyear)
 # %%
 # With MinD4.
 (result_m4.resample('Y').sum()-y_df)
+
+# %%
+# With MinD4.
+(result_q_d4.resample('Y').sum()-y_df)
+
+# %%
+# With MinD4.
+(result_q_m4.resample('Y').sum()-y_df)
+
+# %%
 
 # %%
