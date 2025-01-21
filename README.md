@@ -1,6 +1,6 @@
 # mind4-minm4-benchmarking
 ---
-This is a fully flegded Python version of the MinD4 and MinM4 benchmarking methods to use on monthly series against yearly series. These methods spring from the protportional Dentom benchmarking technique. The MinM4 benchmarking method minimizes the proportional, least square difference in relative adjustment to neighbouring quarters, subject to the constraint that the sum of the monthly values for a given year sum up to the corresponding yearly benchmark value. The MinD4 method does the same, but further takes into account the monthly values leading and following the years respectively. Both result in smooth benchmarking effects within the year. In addition MinD4 provides smoothing across the current, leading and following years so that the method doesn't cause jumps in the time series between years.
+This is a fully flegded Python version of the MinD4 and MinM4 benchmarking methods to use on monthly or quarterly series against yearly series. These methods spring from the protportional Dentom benchmarking technique. The MinM4 benchmarking method minimizes the proportional, least square difference in relative adjustment to neighbouring months/quarters, subject to the constraint that the sum of the higher frequency values for a given year sum up to the corresponding yearly benchmark value. The MinD4 method does the same, but further takes into account the values leading and following the years respectively. Both result in smooth benchmarking effects within the year. In addition MinD4 provides smoothing across the current, leading and following years so that the method doesn't cause jumps in the time series between years.
 
 For further documentation of the proportional Denton method, see chapter VI, C and annex 6.3. of the IMF manual: https://www.imf.org/external/pubs/ft/qna/2000/textbook/ch6.pdf
 
@@ -73,7 +73,7 @@ A =
 
 To use this method, simply utilise the functions minm4(m_df, y_df, list, baseyear, startyear) or mind4(m_df, y_df, list, baseyear, startyear). These functions take the arguments:
 
-m_df: a dataframe with a monthly pd.PeriodIndex, 
+m_df: a dataframe with a monthly or quarterly pd.PeriodIndex, 
 
 y_df: a dataframe with a yearly pd.PeriodIndex, 
 
