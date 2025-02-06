@@ -4,7 +4,7 @@ This is a fully flegded Python version of the MinD4 and MinM4 benchmarking metho
 
 For further documentation of the proportional Denton method, see chapter VI, C and annex 6.3. of the IMF manual: https://www.imf.org/external/pubs/ft/qna/2000/textbook/ch6.pdf
 
-The following is the math behind 
+The following is the math behind:
 
 From Annex 6.A3.1.: 
 
