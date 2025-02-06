@@ -92,6 +92,6 @@ Make sure that the series you wish to benchmark exist in both the dataframes and
 
 By:
 
-Vemund <uve@ssb.no>
-
 Magnus Kvåle Helliesen <magnus.helliesen@gmail.com>
+
+Vemund Rundberget <uve@ssb.no>
