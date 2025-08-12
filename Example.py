@@ -17,8 +17,6 @@ import numpy as np
 from numpy.linalg import *
 import pandas as pd
 import warnings
-warnings.simplefilter('ignore', category=FutureWarning)
-warnings.simplefilter('always', UserWarning) 
 np.set_printoptions(suppress=True)
 pd.set_option("display.float_format", "{:.0f}".format)
 
@@ -29,11 +27,11 @@ import matplotlib as plt
 from mind4 import mind4
 from minm4 import minm4
 
-from mind4_quarterly import mind4_q
-from minm4_quarterly import minm4_q
-
 # %% [markdown]
 # ## Input Data
+
+# %% [markdown]
+# Loading input data.
 
 # %%
 m_df = pd.read_csv('monthly_data.csv', index_col=0)
@@ -60,7 +58,7 @@ m_df
 # ### Defining Parameters
 
 # %%
-list_to_benchmarking = y_df.columns.to_list()
+list_to_benchmarking = ['serieA', 'serieB']
 
 baseyear = 2022
 firstyear = 2016
@@ -89,12 +87,12 @@ result_m4 = minm4(m_df, y_df, list_to_benchmarking, baseyear, firstyear)
 # ### Quarterly frequency
 
 # %%
-result_q_m4 = minm4_q(q_df, y_df, list_to_benchmarking, baseyear, firstyear)
+result_q_m4 = minm4(q_df, y_df, list_to_benchmarking, baseyear, firstyear, freq='Q')
 
 #result_m4
 
 # %%
-result_q_d4 = mind4_q(q_df, y_df, list_to_benchmarking, baseyear, firstyear)
+result_q_d4 = mind4(q_df, y_df, list_to_benchmarking, baseyear, firstyear, freq='Q')
 
 #result_q_d4
 
