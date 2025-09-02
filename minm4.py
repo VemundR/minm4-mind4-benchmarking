@@ -21,9 +21,7 @@ np.set_printoptions(suppress=True)
 
 def minm4(mnr, rea, liste_m4, basisaar, startaar, freq='M'):
     res_dict = {}
-       
-    if type(liste_m4) == str:
-        liste_m4 = [liste_m4]
+
         
     if not (freq == 'M' or freq == 'Q'):
         raise TypeError('The frequency setting must me either "M" or "Q".')
@@ -38,7 +36,9 @@ def minm4(mnr, rea, liste_m4, basisaar, startaar, freq='M'):
     # Checking object type.
     if not type(liste_m4) == list or type(liste_m4) == str:
         raise TypeError('You need to create a list of all the series you wish to benchmark, and it must be in the form of a list or string.')
-    
+    if type(liste_m4) == str:
+        liste_m4 = [liste_m4]
+
     # Checking the monthly DF.
     if not isinstance(mnr, pd.DataFrame):
         if  freq == 'M':
@@ -50,7 +50,7 @@ def minm4(mnr, rea, liste_m4, basisaar, startaar, freq='M'):
     mnr_of_concern = mnr_of_concern[(mnr_of_concern.index.year <= basisaar) & (mnr_of_concern.index.year >= startaar)]
     
     if not pd.Series(liste_m4).isin(mnr.columns).all():
-        raise TypeError(f'{np.setdiff1d(liste_m4, mnr.columns)} are missing in the {periodely} dataframe.')
+        raise TypeError(f'{np.setdiff1d(liste_m4, mnr.columns).tolist()} are missing in the {periodely} dataframe.')
     if mnr_of_concern.isna().any().any() is np.True_:
         warnings.warn(f'There are NaN-values in {mnr_of_concern.columns[mnr_of_concern.isna().any()].to_list()} in the {periodely} dataframe.', UserWarning, stacklevel=2)
     if (mnr_of_concern == 0).any().any() is np.True_:
@@ -66,7 +66,7 @@ def minm4(mnr, rea, liste_m4, basisaar, startaar, freq='M'):
     rea_of_concern = rea_of_concern[(rea_of_concern.index.year <= basisaar) & (rea_of_concern.index.year >= startaar)]
    
     if not pd.Series(liste_m4).isin(rea.columns).all():
-        raise TypeError(f'{np.setdiff1d(liste_m4, rea.columns)} are missing in the {periodely} dataframe.')
+        raise TypeError(f'{np.setdiff1d(liste_m4, rea.columns).tolist()} are missing in the yearly dataframe.')
     if rea_of_concern.isna().any().any() is np.True_:
         warnings.warn(f'There are NaN-values in {rea_of_concern.columns[rea_of_concern.isna().any()].to_list()} in the yearly dataframe.', UserWarning, stacklevel=2)
     if (rea_of_concern == 0).any().any() is np.True_:
